@@ -40,7 +40,13 @@ pipenv install
 pipenv install
 ```
 
-3. Run project
+3. Activate pipenv environment.
+
+```
+pipenv shell
+```
+
+4. Run project
 
 ```
 python main.py
