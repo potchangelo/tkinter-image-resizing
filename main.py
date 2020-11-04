@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import filedialog as fd
+import image as im
 
 class App:
     def __init__(self):
@@ -6,7 +8,7 @@ class App:
         self.window = None
         self.image_original = None
         self.image_tk = None
-        self.label_image = None,
+        self.label_image = None
         self.entry_width_list = []
 
         # - Create app
@@ -40,7 +42,7 @@ class App:
         self.label_image.grid(row=1, column=0)
 
         # - Button
-        button = tk.Button(master=frame_left, text='Choose image')
+        button = tk.Button(master=frame_left, text='Choose image', command=self.open_image)
         button.grid(row=2, column=0, padx=10, pady=15, ipadx=10, ipady=5)
 
     def create_right_frame(self):
@@ -73,6 +75,15 @@ class App:
         # - Button
         button = tk.Button(master=frame_right, text='Export images')
         button.grid(row=2, column=0, padx=10, pady=15, ipadx=10, ipady=5)
+
+    def open_image(self):
+        filename = fd.askopenfilename(filetypes=(('image files', '*.png *.jpg'),))
+        if len(filename) == 0:
+            return
+
+        self.image_original, self.image_tk = im.image_open(filename)
+        self.label_image.config(image=self.image_tk)
+        self.label_image.image = self.image_tk
 
     def run(self):
         self.window.mainloop()
