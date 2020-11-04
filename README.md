@@ -51,5 +51,3 @@ pipenv shell
 ```
 python main.py
 ```
-
-Note: for macOS with pre-installed Python 2, use python3 instead of python.
