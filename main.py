@@ -73,7 +73,7 @@ class App:
             label_px.grid(row=i, column=2, pady=(0, 20))
 
         # - Button
-        button = tk.Button(master=frame_right, text='Export images')
+        button = tk.Button(master=frame_right, text='Export images', command=self.save_image)
         button.grid(row=2, column=0, padx=10, pady=15, ipadx=10, ipady=5)
 
     def open_image(self):
@@ -84,6 +84,17 @@ class App:
         self.image_original, self.image_tk = im.image_open(filename)
         self.label_image.config(image=self.image_tk)
         self.label_image.image = self.image_tk
+
+    def save_image(self):
+        if self.image_original is None:
+            return
+
+        directory = fd.askdirectory()
+        if len(directory) == 0:
+            return
+
+        width_list = (entry.get() for entry in self.entry_width_list)
+        im.image_save(self.image_original, directory, width_list)
 
     def run(self):
         self.window.mainloop()

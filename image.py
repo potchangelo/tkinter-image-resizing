@@ -14,3 +14,16 @@ def image_open(filename):
     image_tk = ImageTk.PhotoImage(image_resized)
 
     return image_original, image_tk
+
+def image_save(image, directory, width_list):
+    image_name_ext = image.filename.split('/')[-1]
+    image_name, image_format = image_name_ext.split('.')
+
+    for width_str in width_list:
+        if len(width_str) == 0:
+            continue
+
+        width = int(width_str)
+        height = int(width * image.size[1] / image.size[0])
+        image_output = image.resize((width, height))
+        image_output.save('{}/{}-{}.{}'.format(directory, image_name, width_str, image_format))
