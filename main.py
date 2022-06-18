@@ -99,4 +99,5 @@ class App:
     def run(self):
         self.window.mainloop()
 
-App()
+if __name__ == '__main__':
+    App()
